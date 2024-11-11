@@ -1,0 +1,102 @@
+// Include the libraries
+#include <iostream>
+#include <string>
+ 
+//Use the standard namespace
+using namespace std;
+ 
+// Declare global variables
+char Board[9];
+ 
+// Declare functions
+void showBoard ( );
+bool moveIsValid ( );
+ 
+
+void showBoard ( )
+{
+   cout << endl;
+   cout << Board[0] << " | " << Board[1] << " | " << Board[2] << endl;
+   cout << "--+---+--" << endl;
+   cout << Board[3] << " | " << Board[4] << " | " << Board[5] << endl;
+   cout << "--+---+--" << endl;
+   cout << Board[6] << " | " << Board[7] << " | " << Board[8] << endl;
+   cout << endl;
+}
+
+
+void main ( )
+{
+   // Declare local variables
+   string Player_1_Name;
+   string Player_2_Name;
+   int Whose_Turn = 1; // 1 means it's player 1's turn, 2 means it's player 2's turn
+   int Move; // Stores where the player wants to move
+   
+ 
+   //Assign values to the playing board
+   Board[0] = '0';
+   Board[1] = '1';
+   Board[2] = '2';
+   Board[3] = '3';
+   Board[4] = '4';
+   Board[5] = '5';
+   Board[6] = '6';
+   Board[7] = '7';
+   Board[8] = '8';
+ 
+   // Get player names
+   cout << "Player 1: Please enter your name." << endl;
+   cin >> Player_1_Name;
+   cout << "Player 2: Please enter your name." << endl;
+   cin >> Player_2_Name;
+ 
+   // Show the board
+   showBoard ( );
+ 
+   // Tell which player to move
+   if (Whose_Turn == 1)
+   {
+      cout << Player_1_Name << ": It's your turn." << endl;
+   }
+   else
+   {
+      cout << Player_2_Name << ": It's your turn." << endl;
+   }
+   // Get the move
+   cout << "Enter the number of the spot where you'd like to move." << endl;
+   cin >> Move;
+ 
+   // Change whose turn it is
+   switch (Whose_Turn)
+   {
+   case (1):
+      {
+         Board[Move] = 'x';
+         Whose_Turn = 2;
+         break;
+      }
+   case (2):
+      {
+         Board[Move] = 'o';
+         Whose_Turn = 1;
+      }
+   }
+ 
+   // Show the board
+   showBoard ( );
+
+   system("PAUSE");
+}
+ 
+bool moveIsValid ( )
+{
+	if (Board[Move] != 'x')
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}

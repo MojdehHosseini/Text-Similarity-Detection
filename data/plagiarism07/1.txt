@@ -1,0 +1,208 @@
+//Tic-Tac-Toe by bob the giraff
+
+// Include the libraries
+#include <iostream>
+#include <string>
+#include <ctime>//for time(0) in israndom()
+#include <cstdlib>//for use of rand() and srand()
+
+//Use the standard namespace
+using namespace std;
+
+// Declare global variables
+
+
+// Declare functions
+void showBoard ( );
+bool moveIsValid ( );
+int isOver();
+int israndom();
+
+
+   //Assign values to the playing board
+string Board[9] = {"0","1","2","3","4","5","6","7","8"};//just another way to load an array 
+
+//notice I loaded Board[] outside of Main(), 
+//that is so that it is a global variable instead of a local one.
+
+int main ( )
+{
+   // Declare local variables
+   string Player_1_Name;
+   string Player_2_Name;
+   int Whose_Turn = 1; // 1 means it's player 1's turn, 2 means it's player 2's turn
+   int Move; // Stores where the player wants to move
+
+
+
+
+   // Get player names
+   cout << "Player 1: Please enter your name." << endl;
+   cin >> Player_1_Name;
+   cout << "Player 2: Please enter your computer's name." << endl;
+   cin >> Player_2_Name;
+  int win=1;
+while(win==1)
+{
+   // Show the board
+   showBoard ( );
+   win=isOver();
+
+   // Tell which player to move
+   if (Whose_Turn == 1 && win!=0)
+   {
+      cout << Player_1_Name << ": It's your turn." << endl;
+         cout << "Enter the number of the spot where you'd like to move." << endl;
+   cin >> Move;
+   }
+   else if(Whose_Turn == 2 && win!=0)
+   {
+      cout << Player_2_Name << ": It's your turn." << endl;
+      Move=israndom();
+   }
+   // Get the move
+
+
+
+   // Change whose turn it is
+   if(win==1)
+   {
+   switch (Whose_Turn)
+   {
+   case (1):
+      {
+         Board[Move] = 'x';
+         Whose_Turn = 2;
+         break;
+      }
+   case (2):
+      {
+         Board[Move] = 'o';
+         Whose_Turn = 1;
+      }
+   }
+}
+}
+
+   // Show the board
+   showBoard ( );
+
+
+}
+
+void showBoard ( )
+{
+   cout << endl;
+   cout << Board[0] << " | " << Board[1] << " | " << Board[2] << endl;
+   cout << "--+---+--" << endl;
+   cout << Board[3] << " | " << Board[4] << " | " << Board[5] << endl;
+   cout << "--+---+--" << endl;
+   cout << Board[6] << " | " << Board[7] << " | " << Board[8] << endl;
+   cout << endl;
+}
+
+bool moveIsValid ( )
+{
+    int Move;
+	if (Board[Move] != "x")
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+int israndom() //random number generator
+{
+    string block = "no";
+    int num;
+  srand(time(0));
+while(block=="no")
+{
+      num=rand()%8;
+      if(Board[num]!="x"&&Board[num]!="o")
+      {
+         block="go";
+      }
+}
+return num;
+}
+int isOver() // win detector, checks if anyone has won. 
+{
+    int end=0;
+ //If you won;
+ if(Board[0]=="x" && Board[1]=="x" && Board[2]=="x")
+ {
+     cout<<"Congrats, you win!"<<endl;
+ }
+ else if(Board[3]=="x"&&Board[4]=="x" && Board[5]=="x")
+ {
+     cout<<"Congrats, you win!"<<endl;
+ }
+else if(Board[6]=="x"&&Board[7]=="x" && Board[8]=="x")
+ {
+     cout<<"Congrats, you win!"<<endl;
+ }
+else if(Board[0]=="x"&&Board[3]=="x" && Board[6]=="x")
+ {
+     cout<<"Congrats, you win!"<<endl;
+ }
+else if(Board[1]=="x"&&Board[4]=="x" && Board[7]=="x")
+ {
+     cout<<"Congrats, you win!"<<endl;
+ }
+else if(Board[2]=="x"&&Board[5]=="x" && Board[8]=="x")
+ {
+     cout<<"Congrats, you win!"<<endl;
+ }
+else if(Board[0]=="x"&&Board[4]=="x" && Board[8]=="x")
+ {
+     cout<<"Congrats, you win!"<<endl;
+ }
+else if(Board[2]=="x"&&Board[4]=="x" && Board[6]=="x")
+ {
+     cout<<"Congrats, you win!"<<endl;
+ }
+
+ //If you lose
+ else if(Board[0]=="o"&&Board[1]=="o" && Board[2]=="o")
+ {
+     cout<<"Oooh, Better luck next time."<<endl;
+ }
+ else if(Board[3]=="o"&&Board[4]=="o" && Board[5]=="o")
+ {
+     cout<<"Oooh, Better luck next time."<<endl;
+ }
+else if(Board[6]=="o"&&Board[7]=="o" && Board[8]=="o")
+ {
+     cout<<"Oooh, Better luck next time."<<endl;
+ }
+else if(Board[0]=="o"&&Board[3]=="o" && Board[6]=="o")
+ {
+     cout<<"Oooh, Better luck next time."<<endl;
+ }
+else if(Board[1]=="o"&&Board[4]=="o" && Board[7]=="o")
+ {
+     cout<<"Oooh, Better luck next time."<<endl;
+ }
+else if(Board[2]=="o"&&Board[5]=="o" && Board[8]=="o")
+ {
+     cout<<"Oooh, Better luck next time."<<endl;
+ }
+else if(Board[0]=="o"&&Board[4]=="o" && Board[8]=="o")
+ {
+     cout<<"Oooh, Better luck next time."<<endl;
+ }
+else if(Board[2]=="o"&&Board[4]=="o" && Board[6]=="o")
+ {
+     cout<<"Oooh, Better luck next time."<<endl;
+ }
+  else
+  {
+      end=1;
+
+  }
+
+return end;
+}
